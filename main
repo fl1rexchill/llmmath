@@ -1,0 +1,58 @@
+import numpy as np
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+
+# 1. Генерация синтетических данных
+np.random.seed(42) # фиксированное значение генерации
+X = np.linspace(0, 10, 100).reshape(-1, 1)  # одна независимая переменная
+a0, a1 = 4, 2
+y = a0 + a1 * X + 1 + np.random.normal(0, 1, (100, 1))  # y = 2x + 1 + шум
+
+# 2. Разделение данных на обучающую и тестовую выборки
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. Создание модели нейронной сети
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(units=1, input_shape=[1])  # один нейрон, одна входная переменная
+])
+
+# 4. Компиляция модели
+model.compile(
+    optimizer='sgd',  # стохастический градиентный спуск
+    loss='mse'        # среднеквадратичная ошибка
+)
+
+# 5. Обучение модели
+history = model.fit(
+    X_train, y_train,
+    epochs=100,
+    validation_data=(X_test, y_test),
+    verbose=1
+)
+
+# 6. Оценка модели
+loss = model.evaluate(X_test, y_test)
+print(f"Ошибка на тестовой выборке: {loss}")
+
+# 7. Получение коэффициентов модели
+weights = model.get_weights()
+slope = weights[0][0][0]  # наклон прямой
+intercept = weights[1][0]  # пересечение с осью y
+print(f"Уравнение регрессии: y = {slope:.2f}x + {intercept:.2f}")
+
+# 8. Визуализация результатов
+plt.scatter(X, y, color='blue', label='Данные')
+plt.plot(X, model.predict(X), color='red', label='Линия регрессии')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.show()
+
+# 9. График функции потерь
+plt.plot(history.history['loss'], label='Обучающая выборка')
+plt.plot(history.history['val_loss'], label='Тестовая выборка')
+plt.xlabel('Эпоха')
+plt.ylabel('Значение функции потерь')
+plt.legend()
+plt.show()
