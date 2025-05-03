@@ -22,4 +22,4 @@ Annotation. The article considers an example of solving a regression problem usi
 
 Keywords.  One-factor linear regression model, fully connected neural network model, neural network training, regression model specification.
 
-[![Alt text](howtowork.gif)]
+![Alt text](howtowork.gif)
