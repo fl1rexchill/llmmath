@@ -21,3 +21,5 @@ USING A NEURAL NETWORK
 Annotation. The article considers an example of solving a regression problem using a fully connected neural network. Along with the existing methods of constructing a regression model specification, in modern conditions of the development of generative technologies, computational algorithms of neural network models for data analysis and prediction of the final result are widely used.  The importance of analyzing and constructing specifications of regression models in econometric research in order to study possible directions for the development of economic sectors is emphasized. The elements of the individual stages of forming a fully connected neural model in the Python programming language are shown. A fragment of the neural network learning process with selected metrics specific to solving this problem is presented.
 
 Keywords.  One-factor linear regression model, fully connected neural network model, neural network training, regression model specification.
+
+[![Alt text](howtowork.gif)]
